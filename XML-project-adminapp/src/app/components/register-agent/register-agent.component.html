@@ -1,0 +1,26 @@
+<div class="layout">
+  <h2>Register</h2>
+  <form #form = "ngForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input type="text" class="form-control" id="name" name="name"  [(ngModel)]="agent.name" myAutofocus>
+    </div>
+
+    <div class="form-group">
+      <label for="surname">Surname:</label>
+      <input type="text" class="form-control" id="surname" name="surname"  [(ngModel)]="agent.surname" myAutofocus>
+    </div>
+
+    <div class="form-group">
+      <label for="address">Adresa:</label>
+      <input type="text" class="form-control" id="address" name="address"  [(ngModel)]="agent.place">
+    </div>
+
+    <div class="form-group">
+      <label for="jmbp">Jedinstveni poslovni maticni broj:</label>
+      <input type="text" class="form-control" id="jmbp" name="jbmp"  [(ngModel)]="agent.businessId">
+    </div>
+
+    <button class="btn btn-primary">Register</button>
+  </form>
+</div>

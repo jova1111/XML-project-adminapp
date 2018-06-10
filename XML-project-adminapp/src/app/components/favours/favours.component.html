@@ -1,0 +1,56 @@
+<h1>Usluge smestaja</h1>
+<table class="table">
+  <tr>
+    <th>id</th>
+    <th>Ime</th>
+    <th></th>
+    <th></th>
+  </tr>
+  <tr  *ngFor="let type of categories"
+        [ngClass]="{'highlight' : selected===type}"
+        (click)="setSelected(type)">
+    <th>
+      {{type.id}}
+    </th>
+    <th>
+      {{type.name}}
+    </th>
+    <th>
+        <button type="button" class="btn btn-primary" (click)=showView(1)>Izmeni</button>
+    </th>
+    <th>
+        <button type="button" class="btn btn-primary" (click)=delete(type)>Izbrisi</button>
+    </th>
+  </tr>
+</table>
+
+<button type="button" class="btn btn-primary" (click)=showView(2)>Dodaj uslugu</button>
+
+<span *ngIf="view==1">
+  <div class="layout">
+    <h2>Izmeni uslugu smestaja</h2>
+    <form #form = "ngForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" class="form-control" id="name" name="name" myAutofocus>
+      </div>
+  
+      <button class="btn btn-primary">Potvrdi izmenu</button>
+    </form>
+  </div> 
+</span>
+
+<span *ngIf="view==2">
+  <div class="layout">
+    <h2>Dodaj tip smestaja</h2>
+    <form #form = "ngForm" (ngSubmit)="add()">
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" class="form-control" id="addname" name="addname" myAutofocus>
+      </div>
+  
+      <button class="btn btn-primary">Potvrdi dodavanje</button>
+    </form>
+  </div> 
+</span>
+

@@ -1,0 +1,45 @@
+<h1>Tipovi smestaja</h1>
+<table class="table">
+  <tr>
+    <th>id</th>
+    <th>Ime</th>
+    <th>Prezime</th>
+    <th>Uloga</th>
+    <th>Email</th>
+    <th>Aktivnost</th>
+    <th></th>
+    <th></th>
+  </tr>
+  <tr  *ngFor="let user of users"
+        [ngClass]="{'highlight' : selected===user}"
+        (click)="setSelected(user)">
+    <th>
+      {{user.id}}
+    </th>
+    <th>
+      {{user.firstName}}
+    </th>
+    <th>
+      {{user.lastName}}
+    </th>
+    <th>
+      {{user.role}}
+    </th>
+    <th>
+      {{user.email}}
+    </th>
+    <th>
+      {{user.activity}}
+    </th>
+    <th>
+        <button type="button" class="btn btn-primary" (click)=update(user)>Izmeni aktivnost</button>
+    </th>
+    <th>
+        <button type="button" class="btn btn-primary" (click)=delete(user)>Izbrisi</button>
+    </th>
+  </tr>
+</table>
+
+
+
+

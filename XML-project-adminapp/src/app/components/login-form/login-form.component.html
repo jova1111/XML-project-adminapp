@@ -1,0 +1,17 @@
+<div class="layout">
+  <h3>Login</h3>
+  <form #form="ngForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="text" class="form-control" name="email" id="email" [(ngModel)]="user.email" myAutofocus>
+    </div>
+
+    <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" class="form-control" name="password" id="password" [(ngModel)]="user.password">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Login</button>
+  </form>
+  <p class="error">{{ error }}</p>
+</div>
