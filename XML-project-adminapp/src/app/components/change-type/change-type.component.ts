@@ -30,7 +30,7 @@ export class ChangeTypeComponent implements OnInit {
   setSelected(category) {
     this.selected = category;
     console.log(category);
-    $('#name').val(this.selected.name);
+    $('#name').val(this.selected.typeName);
   }
 
   showView(number) {
@@ -39,7 +39,7 @@ export class ChangeTypeComponent implements OnInit {
   }
 
   onSubmit() {
-    this.selected.name = $('#name').val();
+    this.selected.typeName = $('#name').val();
     this.categoryService.updateCategory(this.selected).then(
       (response) => console.log(response),
       (error) => console.log(error) 
@@ -49,25 +49,27 @@ export class ChangeTypeComponent implements OnInit {
 
   add() {
     
-    this.categoryAdd.name = $('#addname').val();
+    this.categoryAdd.typeName = $('#addname').val();
     this.categoryService.updateCategory(this.categoryAdd).then(
-      (response) => console.log(response),
+      (response) => {this.categories.push(response)
+        alert("Uspesno ste dodali tip smestaja")
+      },
       (error) => console.log(error) 
     );
     this.view = 0;
-    this.router.navigateByUrl('/home');
   }
 
   delete(category) {
     
     this.selected = category;
     this.categoryService.deleteCategory(this.selected).then(
-    (response) => console.log(response),
+      (response) => {
+        this.categories.splice(this.categories.indexOf(this.selected),1)    
+        alert("Uspesno ste izbrisali kategoriju")
+      },
     (error) => console.log(error) 
     );
     this.view = 0;
-    this.router.navigateByUrl('/home');
-
   }
 
 }

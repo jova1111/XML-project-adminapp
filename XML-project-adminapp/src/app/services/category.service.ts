@@ -19,6 +19,18 @@ export class CategoryService {
     return this.http.get(this.serverURL + '/getCategories');
   }
 
+  public addCategory(category : Category) {
+    const headers: HttpHeaders = new HttpHeaders({'X-Requested-With': 'XMLHttpRequest'});
+    return new Promise((resolve, reject) => {this.http.post(this.serverURL + '/updateCategory', category, { headers: headers } ).subscribe(
+      (success) => {
+        resolve(success)
+      }, 
+      (error) => {
+        reject(error)
+      })
+   });  
+  }
+
   public updateCategory(category : Category) {
     const headers: HttpHeaders = new HttpHeaders({'X-Requested-With': 'XMLHttpRequest'})
       .append('Content-Type', 'application/json');
@@ -33,8 +45,7 @@ export class CategoryService {
   }
 
   public deleteCategory(category : Category) {
-    const headers: HttpHeaders = new HttpHeaders({'X-Requested-With': 'XMLHttpRequest'})
-      .append('Content-Type', 'application/json');
+    const headers: HttpHeaders = new HttpHeaders({'X-Requested-With': 'XMLHttpRequest'});
     return new Promise((resolve, reject) => {this.http.post(this.serverURL + '/deleteCategory', category, { headers: headers } ).subscribe(
       (success) => {
         resolve(success)

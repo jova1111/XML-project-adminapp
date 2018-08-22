@@ -13,6 +13,7 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   public login(user: User) {
+    console.log(user);
     var data = {
       /*client_id: '2',
       client_secret: 'dRKS8omkeSCVp4VdaCZnd2DItMHxdlur96NGOine',
@@ -24,6 +25,29 @@ export class AuthService {
       this.http.post(this.serverURL + '/loginAdmin', data).subscribe(
         (response: any) => {
           this.authenticate(response.token, response.expiresIn);
+          
+          resolve("Successfully logged in!");
+        },
+        (error: HttpErrorResponse) => {
+          reject('Нисте унели исправне податке!');
+        });
+    });
+  }
+
+  public logout(user: User) {
+    console.log(user);
+    var data = {
+      /*client_id: '2',
+      client_secret: 'dRKS8omkeSCVp4VdaCZnd2DItMHxdlur96NGOine',
+      grant_type: 'password',*/
+      email: user.email,
+      password: user.password
+    };
+    return new Promise((resolve, reject)=> {
+      this.http.post(this.serverURL + '/logoutAdmin', data).subscribe(
+        (response: any) => {
+          this.authenticate(response.token, response.expiresIn);
+          
           resolve("Successfully logged in!");
         },
         (error: HttpErrorResponse) => {
@@ -39,10 +63,13 @@ export class AuthService {
 
   public isAuthenticated():boolean {
     let tokenJson = localStorage.getItem('token');
+    console.log(tokenJson);
     if (!tokenJson) {
       return false;
     }
     let token = JSON.parse(tokenJson);
+    console.log(Date.now());
+    console.log(token.expirationDate);
     if(Date.now() > token.expirationDate) {
       localStorage.removeItem('token');
       return false;
@@ -64,6 +91,7 @@ export class AuthService {
   }
 
   public registerAgent(agent: Agent) {
+    console.log(agent);
     const headers: HttpHeaders = new HttpHeaders({'X-Requested-With': 'XMLHttpRequest'})
                                      .append('Content-Type', 'application/json');
     return new Promise((resolve, reject) => {this.http.post(this.serverURL + '/registerAgent', agent, { headers: headers } ).subscribe(
@@ -78,6 +106,10 @@ export class AuthService {
 
   public getUsers() {
     return this.http.get(this.serverURL + '/getUsers');
+  }
+
+  public getAgents() {
+    return this.http.get(this.serverURL + '/getAgents');
   }
 
   public changeActivity(user: DeleteUser) {

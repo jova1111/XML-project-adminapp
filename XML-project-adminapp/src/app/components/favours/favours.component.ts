@@ -51,23 +51,25 @@ export class FavoursComponent implements OnInit {
     
     this.categoryAdd.name = $('#addname').val();
     this.categoryService.updateCategory(this.categoryAdd).then(
-      (response) => console.log(response),
+      (response) => {this.categories.push(response)
+        alert("Uspesno ste dodali uslugu semstaja")
+      },
       (error) => console.log(error) 
     );
     this.view = 0;
-    this.router.navigateByUrl('/home');
   }
 
   delete(category) {
     
     this.selected = category;
     this.categoryService.deleteCategory(this.selected).then(
-    (response) => console.log(response),
+      (response) => {
+        this.categories.splice(this.categories.indexOf(this.selected),1)    
+        alert("Uspesno ste izbrisali uslugu smestaja")
+      },
     (error) => console.log(error) 
     );
     this.view = 0;
-    this.router.navigateByUrl('/home');
-
   }
 
 }

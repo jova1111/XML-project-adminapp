@@ -1,4 +1,7 @@
-.layout {
-    margin: 10px;
+input {
     width: 50%;
 }
+
+.highlight{
+    background: #42A948; /* green */
+  }

@@ -1,19 +1,48 @@
 <div class="layout">
-  <h2>Register</h2>
-  <form #form = "ngForm" (ngSubmit)="onSubmit()">
+<h2>Register</h2>
+<table class="table">
+  <tr>
+    <th>id</th>
+    <th>Ime</th>
+    <th>Prezime</th>
+    <th>Adresa</th>
+    <th>business id</th>
+  </tr>
+  <tr  *ngFor="let user of users"
+        [ngClass]="{'highlight' : selected===user}"
+        (click)="setSelected(user)">
+    <th>
+      {{user.id}}
+    </th>
+    <th>
+      {{user.firstName}}
+    </th>
+    <th>
+      {{user.lastName}}
+    </th>
+    <th>
+      {{user.adress}}
+    </th>
+    <th>
+      {{user.businessId}}
+    </th>
+  </tr>
+</table>
+
+  <form id="registerAgentForm" #form = "ngForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label for="name">Name:</label>
-      <input type="text" class="form-control" id="name" name="name"  [(ngModel)]="agent.name" myAutofocus>
+      <input type="text" class="form-control" id="name" name="name"  [(ngModel)]="agent.firstName" myAutofocus>
     </div>
 
     <div class="form-group">
       <label for="surname">Surname:</label>
-      <input type="text" class="form-control" id="surname" name="surname"  [(ngModel)]="agent.surname" myAutofocus>
+      <input type="text" class="form-control" id="surname" name="surname"  [(ngModel)]="agent.lastName" myAutofocus>
     </div>
 
     <div class="form-group">
       <label for="address">Adresa:</label>
-      <input type="text" class="form-control" id="address" name="address"  [(ngModel)]="agent.place">
+      <input type="text" class="form-control" id="address" name="address"  [(ngModel)]="agent.adress">
     </div>
 
     <div class="form-group">

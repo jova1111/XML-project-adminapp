@@ -19,7 +19,6 @@ export class UsersComponent implements OnInit {
     this.authService.getUsers().subscribe(
       result => {
         this.users = result;
-        console.log(this.users);
       }
     );
   }
@@ -34,23 +33,27 @@ export class UsersComponent implements OnInit {
     this.selected = user;
     console.log(user);
     this.authService.deleteUser(this.selected).then(
-    (response) => console.log(response),
+      (response) => {
+        this.users.splice(this.users.indexOf(this.selected),1)    
+        alert("Uspesno ste izbrisali korisnika")
+      },
     (error) => console.log(error) 
     );
-    this.router.navigateByUrl('/home');
-
   }
 
   update(user) {
     
     this.selected = user;
-    console.log(user);
-
     this.authService.changeActivity(this.selected).then(
-    (response) => console.log(response),
+    (response) => {this.users[this.selected] = response
+      this.authService.getUsers().subscribe(
+        result => {
+          this.users = result;
+        }
+      );
+    },
     (error) => console.log(error) 
     );
-    this.router.navigateByUrl('/home');
 
   }
 }

@@ -20,10 +20,10 @@ export class TypeService {
   }
 
   public updateCategory(category : Type) {
-    const headers: HttpHeaders = new HttpHeaders({'X-Requested-With': 'XMLHttpRequest'})
-      .append('Content-Type', 'application/json');
+    const headers: HttpHeaders = new HttpHeaders({'X-Requested-With': 'XMLHttpRequest'});
     return new Promise((resolve, reject) => {this.http.post(this.serverURL + '/updateLodgingType', category, { headers: headers } ).subscribe(
       (success) => {
+        console.log(success)
         resolve(success)
       }, 
       (error) => {
@@ -33,8 +33,7 @@ export class TypeService {
   }
 
   public deleteCategory(category : Type) {
-    const headers: HttpHeaders = new HttpHeaders({'X-Requested-With': 'XMLHttpRequest'})
-      .append('Content-Type', 'application/json');
+    const headers: HttpHeaders = new HttpHeaders({'X-Requested-With': 'XMLHttpRequest'});
     return new Promise((resolve, reject) => {this.http.post(this.serverURL + '/deleteLodgingType', category, { headers: headers } ).subscribe(
       (success) => {
         resolve(success)
