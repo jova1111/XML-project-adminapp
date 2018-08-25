@@ -54,7 +54,7 @@ export class ChangeTypeComponent implements OnInit {
       (response) => {this.categories.push(response)
         alert("Uspesno ste dodali tip smestaja")
       },
-      (error) => console.log(error) 
+      (error) => {alert("Tip smestaja sa ovim imenom vec postoji")}
     );
     this.view = 0;
   }

@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import { DeleteUser } from '../../model/user';
-import * as $ from 'jquery';
 import { Router } from '@angular/router';
 
 @Component({
@@ -46,6 +44,7 @@ export class UsersComponent implements OnInit {
     this.selected = user;
     this.authService.changeActivity(this.selected).then(
     (response) => {this.users[this.selected] = response
+      alert("Uloga korinika je promenjena")
       this.authService.getUsers().subscribe(
         result => {
           this.users = result;

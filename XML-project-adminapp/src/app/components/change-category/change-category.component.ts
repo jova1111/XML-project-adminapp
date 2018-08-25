@@ -57,7 +57,7 @@ export class ChangeCategoryComponent implements OnInit {
       (response) => {this.categories.push(response)
         alert("Uspesno ste dodali kategoriju")
       },
-      (error) => console.log(error) 
+      (error) =>  alert("Kategorija sa ovim imenom vec postoji")
     );
     this.view = 0;
     

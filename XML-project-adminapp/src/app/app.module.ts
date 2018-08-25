@@ -1,10 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { LoginFormComponent } from './components/login-form/login-form.component';
 import { FormsModule } from '@angular/forms';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { RouterModule, Routes } from '@angular/router';
-
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { HttpClient, HttpHandler, HttpClientModule } from '@angular/common/http';
@@ -16,15 +14,18 @@ import { RegisterAgentComponent } from './components/register-agent/register-age
 import { ChangeTypeComponent } from './components/change-type/change-type.component';
 import { FavoursComponent } from './components/favours/favours.component';
 import { UsersComponent } from './components/users/users.component';
+import { ApproveCommentComponent } from './components/approve-comment/approve-comment.component';
+import { ApprovedCommentService } from './services/approved-comment.service';
+
 
 const appRoutes: Routes = [
-  { path: 'login', component: LoginFormComponent },
   { path: 'home', component: HomeComponent },
   { path: 'changeCategory', component: ChangeCategoryComponent },
   { path: 'changeType', component: ChangeTypeComponent },
   { path: 'favour', component: FavoursComponent },
   { path: 'users', component: UsersComponent },
   { path: 'registerAgent', component: RegisterAgentComponent },
+  { path: 'approvedComment', component: ApproveCommentComponent},
   { path: '',
     redirectTo: '/home',
     pathMatch: 'full'
@@ -34,7 +35,6 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    LoginFormComponent,
     NavbarComponent,
     HomeComponent,
     ChangeCategoryComponent,
@@ -42,6 +42,7 @@ const appRoutes: Routes = [
     ChangeTypeComponent,
     FavoursComponent,
     UsersComponent,
+    ApproveCommentComponent,
     ],
   imports: [
     BrowserModule,
@@ -49,7 +50,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     HttpClientModule,
   ],
-  providers: [ HttpClientModule, AuthService, CategoryService, TypeService ],
+  providers: [ HttpClientModule, AuthService, CategoryService, TypeService, ApprovedCommentService ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

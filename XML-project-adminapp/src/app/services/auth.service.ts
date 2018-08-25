@@ -25,29 +25,7 @@ export class AuthService {
       this.http.post(this.serverURL + '/loginAdmin', data).subscribe(
         (response: any) => {
           this.authenticate(response.token, response.expiresIn);
-          
-          resolve("Successfully logged in!");
-        },
-        (error: HttpErrorResponse) => {
-          reject('Нисте унели исправне податке!');
-        });
-    });
-  }
-
-  public logout(user: User) {
-    console.log(user);
-    var data = {
-      /*client_id: '2',
-      client_secret: 'dRKS8omkeSCVp4VdaCZnd2DItMHxdlur96NGOine',
-      grant_type: 'password',*/
-      email: user.email,
-      password: user.password
-    };
-    return new Promise((resolve, reject)=> {
-      this.http.post(this.serverURL + '/logoutAdmin', data).subscribe(
-        (response: any) => {
-          this.authenticate(response.token, response.expiresIn);
-          
+          console.log(response.token)
           resolve("Successfully logged in!");
         },
         (error: HttpErrorResponse) => {
@@ -63,31 +41,15 @@ export class AuthService {
 
   public isAuthenticated():boolean {
     let tokenJson = localStorage.getItem('token');
-    console.log(tokenJson);
     if (!tokenJson) {
       return false;
     }
     let token = JSON.parse(tokenJson);
-    console.log(Date.now());
-    console.log(token.expirationDate);
     if(Date.now() > token.expirationDate) {
       localStorage.removeItem('token');
       return false;
     }
     return true;
-  }
-
-  public register(user: User) {
-    const headers: HttpHeaders = new HttpHeaders({'X-Requested-With': 'XMLHttpRequest'})
-                                     .append('Content-Type', 'application/json');
-    return new Promise((resolve, reject) => {this.http.post(this.serverURL + '/user', user, { headers: headers } ).subscribe(
-      (success) => {
-        resolve(success)
-      }, 
-      (error) => {
-        reject(error)
-      })
-    });
   }
 
   public registerAgent(agent: Agent) {

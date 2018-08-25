@@ -13,7 +13,7 @@
       <ul class="nav navbar-nav">
         <li><a [routerLinkActiveOptions]="{exact:true}" [routerLinkActive]="['active']" routerLink="/home">Почетна</a></li>
         <span *ngIf="!isLogged">
-          <li><a [routerLinkActiveOptions]="{exact:true}" [routerLinkActive]="['active']" routerLink="/login">Login</a></li>
+          <li><a (click)="loginForm($event)">Login</a></li>
         </span>
         <span *ngIf="isLogged">
           <li><a [routerLinkActiveOptions]="{exact:true}" [routerLinkActive]="['active']" routerLink="/users">Promena aktivnosti korisnika</a></li>
@@ -28,6 +28,9 @@
           <li><a [routerLinkActiveOptions]="{exact:true}" [routerLinkActive]="['active']" routerLink="/favour">Promena usluge smestaja</a></li>
         </span>
         <span *ngIf="isLogged">
+          <li><a [routerLinkActiveOptions]="{exact:true}" [routerLinkActive]="['active']" routerLink="/approvedComment">Odobri komentar</a></li>
+        </span>
+        <span *ngIf="isLogged">
           <li><a [routerLinkActiveOptions]="{exact:true}" [routerLinkActive]="['active']" routerLink="/registerAgent">Registruj agenta</a></li>
         </span>
         <span *ngIf="isLogged">
@@ -37,3 +40,23 @@
     </div>
   </div>
 </nav>
+
+<span *ngIf="show">
+<div class="layout">
+  <h3>Login</h3>
+  <form #form="ngForm" (ngSubmit)="loginAdmin()">
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="text" class="form-control" name="email" id="email" [(ngModel)]="user.email" myAutofocus>
+    </div>
+
+    <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" class="form-control" name="password" id="password" [(ngModel)]="user.password">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Login</button>
+  </form>
+  <p class="error">{{ error }}</p>
+</div>
+</span>

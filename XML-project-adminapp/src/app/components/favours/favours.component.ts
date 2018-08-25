@@ -54,7 +54,7 @@ export class FavoursComponent implements OnInit {
       (response) => {this.categories.push(response)
         alert("Uspesno ste dodali uslugu semstaja")
       },
-      (error) => console.log(error) 
+      (error) =>  alert("Vec postoji usluga sa ovim nazivom") 
     );
     this.view = 0;
   }

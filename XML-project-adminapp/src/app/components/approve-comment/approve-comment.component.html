@@ -1,0 +1,33 @@
+<h1>Komentari</h1>
+<table class="table">
+  <tr>
+    <th>id</th>
+    <th>Komentar</th>
+    <th>Izdavac</th>
+    <th>Smestaj</th>
+    <th></th>
+  </tr>
+  <tr  *ngFor="let comment of comments"
+        [ngClass]="{'highlight' : selected===comment}"
+        (click)="setSelected(comment)">
+    <th>
+      {{comment.id}}
+    </th>
+    <th>
+      {{comment.content}}
+    </th>
+    <th>
+      {{comment.publisher.firstName}} {{comment.publisher.lastName}}
+    </th>
+    <th>
+      {{comment.lodging.naziv}}
+    </th>
+    <th>
+        <button type="button" class="btn btn-primary" (click)=approved(comment)>Odobri</button>
+    </th>
+  </tr>
+</table>
+
+
+
+
