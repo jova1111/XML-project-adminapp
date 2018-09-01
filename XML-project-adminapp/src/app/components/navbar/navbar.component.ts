@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { User } from '../../model/User';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -15,7 +16,7 @@ export class NavbarComponent implements OnInit {
   private user: User = new User();
   private error: string;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.isLogged = this.authService.isAuthenticated();
@@ -25,6 +26,7 @@ export class NavbarComponent implements OnInit {
   onClick(){
     this.isLogged = false;
     localStorage.removeItem('token');
+    this.router.navigate(["/home"]);
   }
 
   loginForm(){
